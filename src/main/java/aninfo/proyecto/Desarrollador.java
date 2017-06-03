@@ -1,4 +1,6 @@
-package aninfo;
+package aninfo.proyecto;
+
+import aninfo.tarea.Tarea;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,4 +29,13 @@ public class Desarrollador {
     public String getNombre() {
         return nombre;
     }
+
+    public boolean tieneMasDe4Tareas() {
+       return (tareas.size() > 4);
+    }
+
+    public boolean hasTarea(Tarea tarea) {
+        return tareas.stream().anyMatch(t -> t.getId().equals(tarea.getId()));
+    }
+
 }

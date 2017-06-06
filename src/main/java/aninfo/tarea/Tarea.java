@@ -4,6 +4,7 @@ import aninfo.Ticket;
 import aninfo.proyecto.fase.Fase;
 import aninfo.tarea.exception.EstimacionNegativaException;
 import aninfo.tarea.exception.PrioridadInvalidaException;
+import aninfo.tarea.exception.TicketInexistenteException;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -72,8 +73,14 @@ public class Tarea {
         this.tickets.add(t);
     }
 
-    public Optional<Ticket> buscarTicket(String id){
-       return tickets.stream().filter(t -> t.getId().equals(id)).findFirst();
+    public Ticket buscarTicket(String id) throws TicketInexistenteException{
+        Optional<Ticket> optTicket = tickets.stream().filter(t -> t.getId().equals(id)).findFirst();
+
+        if(optTicket.isPresent()){
+            return optTicket.get();
+        }else{
+            throw new TicketInexistenteException();
+        }
     }
 
     public void setFase(Fase fase) {

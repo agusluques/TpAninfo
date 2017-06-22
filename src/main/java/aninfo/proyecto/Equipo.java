@@ -14,10 +14,6 @@ public class Equipo {
         this.desarrolladores = desarrolladores;
     }
 
-    public Boolean isEmpty(){
-        return desarrolladores.isEmpty();
-    }
-
     public List<Desarrollador> desarrolladoresConCuatroOMenosTareas(){
         return desarrolladores.stream()
                         .filter(d -> d.cantidadDeTareasAsignadas() <= 4)

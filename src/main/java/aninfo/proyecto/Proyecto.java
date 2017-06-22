@@ -103,11 +103,16 @@ public class Proyecto {
                 .anyMatch(d -> d.getNombre().equals(nombreDelDesarrollador));
     }
 
+    public Boolean estaDesarrolladorEnElProyecto(String nombreDelDesarrollador) {
+        return equipo.getDesarrolladores().stream().anyMatch(x -> x.getNombre().equals(nombreDelDesarrollador));
+    }
+
     public void asignar(Equipo equipo) {
         this.equipo = equipo;
     }
 
     private Desarrollador buscarDesarrollador(String nombreDelDesarrollador) throws ProyectoException {
+        if(equipo == null) throw new ProyectoSinEquipoException();
         Optional<Desarrollador> optDev = equipo.getDesarrolladores().stream()
                 .filter(d -> d.getNombre().equals(nombreDelDesarrollador)).findFirst();
 

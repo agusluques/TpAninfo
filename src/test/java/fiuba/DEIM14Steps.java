@@ -34,15 +34,31 @@ public class DEIM14Steps {
         proyecto.agregarTarea(tarea);
     }
 
-    @Cuando("^la priorizo con prioridad ALTA$")
-    public void la_priorizo_con_prioridad_ALTA() throws Throwable {
-       tarea = proyecto.asignarPrioridadATarea("Tarea0",Tarea.PRIORIDAD_ALTA);
+    @Cuando("^la priorizo con prioridad \"(.*?)\"$")
+    public void la_priorizo_con_prioridad_ALTA(String arg) throws Throwable {
+        if(arg.equals("BAJA")){
+            tarea = proyecto.asignarPrioridadATarea("Tarea0",Tarea.PRIORIDAD_BAJA);
+        }
+        if(arg.equals("MEDIA")){
+            tarea = proyecto.asignarPrioridadATarea("Tarea0",Tarea.PRIORIDAD_MEDIA);
+        }
+        if(arg.equals("ALTA")){
+            tarea = proyecto.asignarPrioridadATarea("Tarea0",Tarea.PRIORIDAD_ALTA);
+        }
     }
 
-    @Entonces("^la tarea queda priorizada con prioridad ALTA$")
-    public void la_tarea_queda_priorizada_con_prioridad_ALTA() throws Throwable {
+    @Entonces("^la tarea queda priorizada con prioridad \"(.*?)\"$")
+    public void la_tarea_queda_priorizada_con_prioridad_ALTA(String arg) throws Throwable {
         int prioridad = tarea.getPrioridad();
-        assertEquals(prioridad,Tarea.PRIORIDAD_ALTA);
+        if(arg.equals("BAJA")){
+            assertEquals(prioridad,Tarea.PRIORIDAD_BAJA);
+        }
+        if(arg.equals("MEDIA")){
+            assertEquals(prioridad,Tarea.PRIORIDAD_MEDIA);
+        }
+        if(arg.equals("ALTA")){
+            assertEquals(prioridad,Tarea.PRIORIDAD_ALTA);
+        }
     }
 //======================================================================================================================
 //======================================================================================================================
